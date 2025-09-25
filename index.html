@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1976d2" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>Field Engineer App (Wrapper)</title>
+
+  <style>
+    html,body{height:100%; margin:0}
+    #appFrame{
+      border:0;
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      width:100%;
+      height:100%;
+    }
+    /* Simple fallback message if iframe blocked */
+    #fallback { display:none; padding:20px; font-family:Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <!-- Replace the src below with your Apps Script exec URL -->
+  <iframe id="appFrame"
+    src="https://script.google.com/macros/s/AKfycbzhnETVFrBNeqrzpC1h084tg6K6nJtcT6l5837l4JqumxkFTmeqjzPOjbxbxArnbid9og/exec"
+    title="Field Engineer App"></iframe>
+
+  <div id="fallback">
+    <h2>Unable to show app</h2>
+    <p>If the app doesn't load inside this page, open the app directly: <a href="https://script.google.com/macros/s/AKfycbzhnETVFrBNeqrzpC1h084tg6K6nJtcT6l5837l4JqumxkFTmeqjzPOjbxbxArnbid9og/exec" target="_blank">Open Field App</a></p>
+  </div>
+
+  <script>
+    // Register the service worker *on this origin* (GitHub Pages)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Wrapper SW registered', reg))
+        .catch(err => console.error('Wrapper SW failed', err));
+    }
+  </script>
+</body>
+</html>
